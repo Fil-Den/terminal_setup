@@ -1,5 +1,8 @@
 # terminal_setup
 
+On some projects I do almost all of my work with AI agents on remote machines, so I spend most of my time in the terminal.
+This repo saves my terminal environment so I can restore it quickly on any machine. It doesn't include AI agent configuration, because that changes from project to project.
+
 My terminal development environment: **Neovim (NvChad)** + **tmux** + a session script.
 
 ## Layout
