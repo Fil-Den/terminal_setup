@@ -16,7 +16,7 @@ Each top-level folder is a [GNU Stow](https://www.gnu.org/software/stow/) packag
 
 - Neovim ≥ 0.10
 - tmux
-- A [Nerd Font](https://www.nerdfonts.com/) in your terminal
+- [JetBrains Mono](https://www.jetbrains.com/lp/mono/) in your terminal (WezTerm falls back to its built-in Nerd Font symbols for icons)
 - GNU Stow (`install.sh` installs it via brew/apt if missing)
 
 ## Install
