@@ -32,6 +32,11 @@ cd ~/dev/terminal_setup
 
 `install.sh` is safe to re-run. Existing non-symlinked configs are moved to `*.bak.<timestamp>`.
 
+## Language servers
+
+LSP is set up for C/C++ (`clangd`), Starlark (`starpls`), Python (`basedpyright` + `ruff`, both configured from `pyproject.toml`) and Markdown (`marksman`), but all are off by default.
+To turn one on, uncomment its line in `nvim/.config/nvim/lua/configs/lspconfig.lua` and install it with `:MasonInstall <name>`.
+
 ## Local overrides
 
 Anything machine-specific or private goes in untracked files:
