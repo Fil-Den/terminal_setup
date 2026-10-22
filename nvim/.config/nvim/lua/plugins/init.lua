@@ -12,4 +12,12 @@ return {
       require "configs.lspconfig"
     end,
   },
+
+  {
+    "mbbill/undotree",
+    cmd = "UndotreeToggle",
+    keys = {
+      { "<leader>u", "<cmd>UndotreeToggle<CR>", desc = "Undotree toggle" },
+    },
+  },
 }
