@@ -51,4 +51,13 @@ Creates a named tmux session, or attaches to it if it already exists:
 tmux-session <name>
 ```
 
-<!-- TODO: add script to bin/.local/bin/ and document its options -->
+New sessions are built from a template in `~/.config/tmux-session/`: `<name>.conf` if it exists, otherwise `default.conf` (an `editor` window running `nvim` plus a `shell`).
+Each line defines a window as `name | directory | command`. The directory defaults to the current one, the command is optional, and `~` and `$SESSION` are expanded.
+`example.conf` is a commented template to copy from:
+
+```
+editor | ~/dev/$SESSION | nvim
+shell  | ~/dev/$SESSION |
+```
+
+Without any template you get a plain session in the current directory. Inside tmux the script switches the client to the session instead of nesting it.

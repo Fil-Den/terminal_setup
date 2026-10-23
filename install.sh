@@ -32,6 +32,7 @@ package_targets() {
   case "$pkg" in
     nvim) echo ".config/nvim" ;;
     bin)  find .local/bin -type f ! -name .gitkeep ;;
+    tmux) echo ".tmux.conf"; echo ".config/tmux-session" ;;
     *)    find . -mindepth 1 -maxdepth 1 ! -name '.stow-local-ignore' | sed 's|^\./||' ;;
   esac
 }
