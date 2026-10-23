@@ -14,6 +14,29 @@ return {
   },
 
   {
+    "nvim-telescope/telescope.nvim",
+    -- Merged into NvChad's telescope opts: include dotfiles, but skip .git/ contents
+    opts = {
+      defaults = {
+        file_ignore_patterns = { "^%.git/", "/%.git/" },
+        vimgrep_arguments = {
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--hidden",
+        },
+      },
+      pickers = {
+        find_files = { hidden = true },
+      },
+    },
+  },
+
+  {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
     keys = {
