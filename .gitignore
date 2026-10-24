@@ -4,3 +4,4 @@
 *.local.conf
 *.bak.*
 tmux/.tmux/plugins/
+tmux/.config/tmux-session
