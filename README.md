@@ -37,6 +37,9 @@ cd ~/dev/terminal_setup
 LSP is set up for C/C++ (`clangd`), Starlark (`starpls`), Python (`basedpyright` + `ruff`, both configured from `pyproject.toml`) and Markdown (`marksman`), but all are off by default.
 To turn one on, uncomment its line in `nvim/.config/nvim/lua/configs/lspconfig.lua` and install it with `:MasonInstall <name>`.
 
+Markdown is linted with `markdownlint-cli2` via `nvim-lint` (`:MasonInstall markdownlint-cli2`); rules can be tuned per project with a `.markdownlint.yaml`.
+Add linters for other filetypes in `nvim/.config/nvim/lua/configs/lint.lua`.
+
 ## Local overrides
 
 Anything machine-specific or private goes in untracked files:
