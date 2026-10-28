@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# Side-by-side diff viewer built on delta.
+#
+#   vcs diff | sbs        view a unified diff from stdin
+#   sbs change.patch      view a patch file
+#   sbs old.txt new.txt   compare two files
+set -euo pipefail
+
+if ! command -v delta >/dev/null 2>&1; then
+  echo "sbs: delta not found (brew install git-delta / apt install git-delta)" >&2
+  exit 1
+fi
+
+# Layout flags are set here so sbs stays side by side even without the config file
+delta=(delta --config "${XDG_CONFIG_HOME:-$HOME/.config}/delta/config"
+  --side-by-side --line-numbers --navigate)
+
+# A single file argument is a patch to show, not one side of a comparison
+opts=() files=()
+for arg in "$@"; do
+  if [[ $arg == -* ]]; then opts+=("$arg"); else files+=("$arg"); fi
+done
+if [[ ${#files[@]} -eq 1 && -f ${files[0]} ]]; then
+  exec "${delta[@]}" ${opts[@]+"${opts[@]}"} < "${files[0]}"
+fi
+exec "${delta[@]}" "$@"

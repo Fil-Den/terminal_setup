@@ -1,0 +1,7 @@
+# delta settings (gitconfig syntax). Used by `sbs`, and by git if ~/.gitconfig includes this file.
+[delta]
+    side-by-side = true
+    line-numbers = true
+    navigate = true # n / N jump between files
+    file-style = bold yellow ul
+    hunk-header-style = file line-number syntax

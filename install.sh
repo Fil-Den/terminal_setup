@@ -4,7 +4,7 @@
 set -euo pipefail
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PACKAGES=(nvim tmux bin)
+PACKAGES=(nvim tmux bin delta)
 TS="$(date +%Y%m%d%H%M%S)"
 
 info() { printf '\033[1;34m==>\033[0m %s\n' "$*"; }
@@ -33,6 +33,7 @@ package_targets() {
     nvim) echo ".config/nvim" ;;
     bin)  find .local/bin -type f ! -name .gitkeep ;;
     tmux) echo ".tmux.conf"; echo ".config/tmux-session" ;;
+    delta) echo ".config/delta" ;;
     *)    find . -mindepth 1 -maxdepth 1 ! -name '.stow-local-ignore' | sed 's|^\./||' ;;
   esac
 }
@@ -65,7 +66,21 @@ if grep -q 'tmux-plugins/tpm' "$DOTFILES/tmux/.tmux.conf" && [[ ! -d "$HOME/.tmu
   git clone --depth 1 https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 fi
 
-# 5. PATH check
+# 5. delta, needed by `sbs`; not fatal if it can't be installed
+if ! command -v delta >/dev/null 2>&1; then
+  if command -v brew >/dev/null 2>&1; then
+    info "Installing delta via Homebrew"
+    brew install git-delta || true
+  elif command -v apt-get >/dev/null 2>&1; then
+    info "Installing delta via apt"
+    sudo apt-get install -y git-delta || true
+  fi
+  if ! command -v delta >/dev/null 2>&1; then
+    warn "delta not installed (needed by sbs). Get a binary from https://github.com/dandavison/delta/releases"
+  fi
+fi
+
+# 6. PATH check
 case ":$PATH:" in
   *":$HOME/.local/bin:"*) ;;
   *) warn "~/.local/bin is not on your PATH. Add: export PATH=\"\$HOME/.local/bin:\$PATH\"" ;;

@@ -13,7 +13,8 @@ Each top-level folder is a [GNU Stow](https://www.gnu.org/software/stow/) packag
 |---|---|
 | `nvim/` | `~/.config/nvim` (NvChad v2.5 custom config, plugin versions pinned in `lazy-lock.json`) |
 | `tmux/` | `~/.tmux.conf` |
-| `bin/`  | `~/.local/bin/` (tmux session script) |
+| `bin/`  | `~/.local/bin/` (tmux session script, `sbs` diff viewer) |
+| `delta/` | `~/.config/delta` (side-by-side diff settings) |
 
 ## Requirements
 
@@ -21,6 +22,7 @@ Each top-level folder is a [GNU Stow](https://www.gnu.org/software/stow/) packag
 - tmux
 - [JetBrains Mono](https://www.jetbrains.com/lp/mono/) in your terminal (WezTerm falls back to its built-in Nerd Font symbols for icons)
 - GNU Stow (`install.sh` installs it via brew/apt if missing)
+- [delta](https://github.com/dandavison/delta) for `sbs` (`install.sh` installs it via brew/apt if missing; otherwise use a release binary)
 
 ## Install
 
@@ -64,3 +66,26 @@ shell  | ~/dev/$SESSION |
 ```
 
 Without any template you get a plain session in the current directory. Inside tmux the script switches the client to the session instead of nesting it.
+
+## Diffs
+
+`sbs` shows any unified diff side by side, with syntax highlighting and line numbers. It works with every VCS that can output a git-style diff:
+
+```sh
+vcs diff | sbs        # diff from stdin
+sbs change.patch      # patch file
+sbs old.txt new.txt   # two files
+```
+
+In the pager, `n` / `N` jump to the next / previous file and `q` quits. Settings live in `delta/.config/delta/config`.
+
+To get the same view from git, add this to `~/.gitconfig`:
+
+```ini
+[include]
+    path = ~/.config/delta/config
+[core]
+    pager = delta
+[interactive]
+    diffFilter = delta --color-only
+```
