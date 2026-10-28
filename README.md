@@ -54,6 +54,7 @@ Creates a named tmux session, or attaches to it if it already exists:
 
 ```sh
 tmux-session <name>
+tmux-session ls       # list running sessions and ones with a template
 ```
 
 New sessions are built from a template in `~/.config/tmux-session/`: `<name>.conf` if it exists, otherwise `default.conf` (an `editor` window running `nvim` plus a `shell`).
