@@ -40,6 +40,14 @@ return {
       },
       pickers = {
         find_files = { hidden = true },
+        -- Close buffers from the picker (<leader>fb): <C-d> in insert mode, dd in normal mode.
+        -- Multi-select with <Tab> first to close several at once.
+        buffers = {
+          mappings = {
+            i = { ["<C-d>"] = "delete_buffer" },
+            n = { ["dd"] = "delete_buffer" },
+          },
+        },
       },
     },
   },
