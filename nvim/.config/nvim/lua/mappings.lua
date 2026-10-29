@@ -19,3 +19,11 @@ map("x", "zf", function()
   vim.wo.foldmethod = "manual"
   return "zf"
 end, { expr = true, desc = "Fold selected region" })
+
+-- Fold/unfold the treesitter block under the cursor (no selection needed). These are Vim's
+-- built-in keys, mapped to themselves so they show up with a description in <C-p>
+map("n", "zc", "zc", { desc = "Fold block under cursor" })
+map("n", "zo", "zo", { desc = "Unfold block under cursor" })
+map("n", "za", "za", { desc = "Toggle fold under cursor" })
+map("n", "zM", "zM", { desc = "Fold all" })
+map("n", "zR", "zR", { desc = "Unfold all" })
