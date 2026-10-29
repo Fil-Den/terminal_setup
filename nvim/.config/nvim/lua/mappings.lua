@@ -9,7 +9,7 @@ local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>", { desc = "Exit insert mode" })
-map("n", "gs", "<cmd>Telescope lsp_document_symbols<CR>", { desc = "LSP document symbols" })
+map("n", "ds", "<cmd>Telescope lsp_document_symbols<CR>", { desc = "LSP document symbols" })
 map("n", "<C-p>", "<cmd>Telescope keymaps<CR>", { desc = "Command palette (search keymaps)" })
 map("n", "<leader>fc", "<cmd>Telescope commands<CR>", { desc = "telescope find commands" })
 
