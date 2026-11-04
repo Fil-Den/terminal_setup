@@ -13,7 +13,19 @@ local servers = {
 
 -- Per-server options (only used when the server is enabled above). See :h vim.lsp.config
 vim.lsp.config("clangd", {
-  cmd = { "clangd", "--background-index", "--clang-tidy", "--header-insertion=never" },
+  cmd = {
+    "clangd",
+    "--query-driver=**",
+    "--ranking-model=heuristics",
+    "--all-scopes-completion",
+    "--completion-parse=auto",
+    "--completion-style=detailed",
+    "--header-insertion=never",
+    "--background-index",
+    "--background-index-priority=low",
+    "-j",
+    "4",
+  },
 })
 
 vim.lsp.config("basedpyright", {
@@ -25,4 +37,15 @@ vim.lsp.config("basedpyright", {
   },
 })
 
+vim.lsp.config("starpls", {
+  cmd = {
+    "<path to starpls binary>",
+    "server",
+    "--experimental_infer_ctx_attributes",
+  },
+  filetypes = { "bzl", "star" },
+  root_markers = { "WORKSPACE", "WORKSPACE.bazel", "MODULE.bazel", },
+})
+
 vim.lsp.enable(servers)
+
